@@ -24,10 +24,10 @@ def binary_search(the_list, val, beg=0, end=None):
     else:
         return binary_search(the_list, val, beg, half)
 
-def verbose_searcher(search_me, value):
+def verbose_searcher(search_me, value, function):
     search_me.sort()
     print search_me
-    print value, "found at", binary_search(search_me, value)
+    print value, "found at", function(search_me, value)
 
 
 if __name__ == '__main__':
