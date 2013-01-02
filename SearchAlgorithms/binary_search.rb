@@ -18,3 +18,6 @@ p search_me
 puts "Michael found at #{binary_search(search_me, 'Michael')}"
 puts "Foobar found at #{binary_search(search_me, 'Foobar')}"
 
+search_me.each do |x|
+  puts "#{x} found at #{binary_search(search_me, x)}"
+end
