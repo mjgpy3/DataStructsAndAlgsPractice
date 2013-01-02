@@ -5,7 +5,7 @@
 # 
 # 
 
-def binary_search(the_list, val, beg = 0, end = None):
+def binary_search(the_list, val, beg=0, end=None):
     """
         Searches through a sorted list for a specific value.
         If not found, returns None
@@ -40,3 +40,6 @@ if __name__ == '__main__':
 
     verbose_searcher(search_me, 'Michael')
     verbose_searcher(search_me, "FooBar")
+
+    for thing in search_me:
+        verbose_searcher(search_me, thing)
