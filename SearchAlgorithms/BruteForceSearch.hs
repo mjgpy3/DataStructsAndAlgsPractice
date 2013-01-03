@@ -14,4 +14,4 @@ searchMeat (x:xs) val i
 searchMeat [] _ _ = Nothing
 
 -- Some testing
-main = print ([ i | let x = [1, 2, 3, 4, 5, 6, 7], u <- x, let i = iterativeSearch x u] )
+main = print ([ i | let x = [1, 2, 3, 4, 5, 6, 7], u <- x, let i = iterativeSearch x u])
