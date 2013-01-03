@@ -8,9 +8,11 @@
 def insertion_sort(list):
     for i in xrange(1, len(list)):
         k = i
-        while k > -1 and list[k] < list[k-1]:
-            list[k], list[k-1] = list[k-1], list[k]
+        item = list[i]
+        while k > 0 and item < list[k-1]:
+            list[k] = list[k-1]
             k -= 1
+        list[k] = item
 
 if __name__ == '__main__':
     sort_me = [1, 43, 123, 5, 2, 654, 23, 4, 123]
