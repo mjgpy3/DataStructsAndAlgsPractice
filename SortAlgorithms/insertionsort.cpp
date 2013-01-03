@@ -32,14 +32,11 @@ void insertionsort(int arr [], int size)
 
 	for (int i = 1; i < size; i++)
 	{
-		int index = i;
+		int index = i, item = arr[index];
 
-		for (int index = i; index > -1 && arr[index] < arr[index-1]; index--)
-		{
-			int temp = arr[index-1];
-                        arr[index-1] = arr[index];
-                        arr[index] = temp;
-		}
-             
+		for (index = i; index > 0 && item < arr[index-1]; index--)
+			arr[index] = arr[index-1];
+
+		arr[index] = item;
 	}
 }
