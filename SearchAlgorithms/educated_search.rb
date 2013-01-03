@@ -18,13 +18,11 @@ def educated_search(array, val)
   # Otherwise loop down
   if array[i] < val
     while array[i] < val and i < array.count-1
-      puts "Hit"
       i += 1
       return i if array[i] == val
     end
   else
     while array[i] > val and i > 0
-      puts "Hit"
       i -= 1
       return i if array[i] == val
     end
@@ -34,7 +32,7 @@ def educated_search(array, val)
   return nil
 end
 
-a = [1,2,3,5,7,8,12,14,15,17,20]
+a = [-20, -15, -10, -9, -8, -6, -5, -4, -3, 0, 1,2,3,5,7,8,12,14,15,17,20]
 
 a.each do |x|
   puts educated_search(a, x)
