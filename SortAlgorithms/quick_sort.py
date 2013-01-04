@@ -14,7 +14,6 @@ def quick_sort(list):
     greater = []
     less = []
     pivot = list.pop()
-    
 
     for elem in list:
         if elem < pivot:
