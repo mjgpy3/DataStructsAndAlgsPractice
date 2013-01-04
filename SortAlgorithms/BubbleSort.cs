@@ -16,15 +16,19 @@ namespace BubbleSort
 		
 		public static void bubbleSort(int [] array)
 		{
+			bool keepLooping = true;
+			
 			for (int i = 0; i < array.Length-1; i++)
 			{
-				for (int k = 0; k < array.Length-1; k++)
+				while (keepLooping)
 				{
+					keepLooping = false;
 					if (array[k] > array[k+1])
 					{
 						int temp = array[k];
 						array[k] = array[k+1];
 						array[k+1] = temp;
+						keepLooping = true;
 					}
 				}
 			}
