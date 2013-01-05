@@ -58,6 +58,10 @@ class MinHeap(Heap):
     def __init__(self):
         Heap.__init__(self, lambda x, y: x > y)
 
+class MaxHeap(Heap):
+    def __init__(self):
+        Heap.__init__(self, lambda x, y: x < y)
+
 if __name__ == '__main__':
     heap = MaxHeap()
 
