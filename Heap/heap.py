@@ -47,10 +47,11 @@ class Node(object):
         self.right = None
 
     def __str__(self):
-        return "[%s <- %s -> %s]" % (str(self.left) if self.left != None \
-                                                    else 'END', str(self.data), \
-                                       str(self.right) if self.right != None \
-                                                       else 'END')
+        return "[%s <- %s -> %s]" % \
+                 (str(self.left) if self.left != None \
+                                 else 'END', str(self.data), \
+                  str(self.right) if self.right != None \
+                                 else 'END')
 
 if __name__ == '__main__':
     heap = Heap()
