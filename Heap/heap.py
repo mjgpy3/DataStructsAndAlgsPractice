@@ -6,9 +6,10 @@
 # 
 
 class Heap(object):
-    def __init__(self):
+    def __init__(self, heap_property=lambda parent, child: parent < child):
         self.count = 0
         self.root = None
+        self.reason_to_switch = heap_property
 
     def heapify(self, iterable):
         for elem in iterable:
@@ -25,7 +26,7 @@ class Heap(object):
         new_node = Node(ordinal)
 
         while i != 1:
-            if current_node.data < new_node.data:
+            if self.reason_to_switch(current_node.data, new_node.data):
                 current_node.data, new_node.data = new_node.data, current_node.data
             if i%2 == 0:
                 if current_node.left:
@@ -53,8 +54,12 @@ class Node(object):
                   str(self.right) if self.right != None \
                                  else 'END')
 
+class MinHeap(Heap):
+    def __init__(self):
+        Heap.__init__(self, lambda x, y: x > y)
+
 if __name__ == '__main__':
-    heap = Heap()
+    heap = MaxHeap()
 
     a = [12, 61, 323, 42, 36, 35, 1, 90, 982, -9, 123, 1, 61, 92, 12, 0, -23, -3]
 
