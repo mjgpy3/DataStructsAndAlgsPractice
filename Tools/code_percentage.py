@@ -17,7 +17,7 @@ languages = []
 lines = []
 
 for language in lang_to_ext:
-    lines.append(int(popen('find .. -name "*' + lang_to_ext[language] + '" | xargs nl').readlines()[-1].split()[0]))
+    lines.append(int(popen('find /home/michael/Programming/DSAAPractice/ -name "*' + lang_to_ext[language] + '" | xargs nl').readlines()[-1].split()[0]))
     languages.append(language + ': ' + str(lines[-1]))
 
 pie(lines,labels=languages)
