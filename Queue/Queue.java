@@ -44,6 +44,7 @@ public class Queue {
 		{
 			data = _end.Data;
 			_end = _end.Last;
+			_end.Next = null;
 		}
 		
 		_count--;
