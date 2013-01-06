@@ -2,4 +2,5 @@ C#
 Java
 Python
 Ruby
->C++
+C++
+Haskell
