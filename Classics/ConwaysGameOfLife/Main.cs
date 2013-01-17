@@ -10,6 +10,8 @@ namespace ConwaysGameOfLife
 		public static void Main (string[] args)
 		{
 			bool [,] grid = new bool[20, 50];
+			bool [,] nextGrid = new bool[20, 50];
+			
 			Random a = new Random();
 			
 			for (int i = 0; i < grid.GetLength(0); i++)
@@ -22,8 +24,10 @@ namespace ConwaysGameOfLife
 				
 				for (int i = 0; i < grid.GetLength(0); i++)
 					for (int j = 0; j < grid.GetLength(1); j++)
-						grid[i, j] = CellLivesNextTurn(grid, i, j);
+						nextGrid[i, j] = CellLivesNextTurn(grid, i, j);
 				
+				grid = (bool [,])nextGrid.Clone();
+			
 				Thread.Sleep(100);
 				Console.Clear();
 			}
