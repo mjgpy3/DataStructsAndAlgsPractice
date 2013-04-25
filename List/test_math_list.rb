@@ -36,6 +36,23 @@ class TestMathList < Test::Unit::TestCase
     assert_a_list_with_5_7 ml
   end
 
+  def test_removing_items_in_an_empty_list_doesnt_do_anything
+    ml = MathList.new
+
+    ml.remove -4
+    ml.remove 8
+    ml.remove 9
+
+    assert_equal 0, ml.sum
+    assert_equal 1, ml.prod
+    assert_equal [], ml.to_a
+    assert_equal 0, ml.count(-4)
+    assert_equal 0, ml.count(8)
+    assert_equal 0, ml.count(9)
+    assert_equal 0, ml.count(0)
+    assert_equal 0, ml.length
+  end
+
   def assert_a_list_with_5_7_and_negative_4 ml
     assert_equal 8, ml.sum
     assert_equal -140, ml.prod
