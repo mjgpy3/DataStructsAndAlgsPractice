@@ -8,18 +8,12 @@
 from random import choice
 
 def quick_sort(list):
-    if len(list) < 2:
-        return list
+    if len(list) < 2: return list
 
-    greater = []
-    less = []
-    pivot = list.pop()
+    greater, less, pivot = [], [], list.pop()
 
     for elem in list:
-        if elem < pivot:
-            less.append(elem)
-        else:
-            greater.append(elem)
+        (less if elem < pivot else greater).append(elem)
 
     return quick_sort(less) + [pivot] + quick_sort(greater)
 
