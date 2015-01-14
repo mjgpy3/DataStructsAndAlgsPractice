@@ -1,9 +1,5 @@
 package linkedlist
 
-import (
-	_"fmt"
-)
-
 type listRoot struct {
 	elementCount int
 }
