@@ -11,7 +11,7 @@ from os import popen
 figure(2, figsize=(5,5))
 
 lang_to_ext = {'Python': '.py', 'Haskell': '.hs', 'C++': '.cpp',
-               'C#': '.cs', 'Ruby': '.rb', 'Java': '.java'}
+        'C#': '.cs', 'Ruby': '.rb', 'Java': '.java', 'Go': '.go' }
 
 languages = []
 lines = []
