@@ -1,12 +1,21 @@
 package linkedlist
 
-type listNode struct {
+import (
+	_"fmt"
+)
+
+type listRoot struct {
+	elementCount int
 }
 
-func (listNode) length() int {
-	return 0
+func (self listRoot) Length() int {
+	return self.elementCount
 }
 
-func make_linkedlist() listNode {
-	return listNode{}
+func (self *listRoot) Add(item interface{}) {
+	self.elementCount += 1
+}
+
+func make_linkedlist() listRoot {
+	return listRoot{}
 }
