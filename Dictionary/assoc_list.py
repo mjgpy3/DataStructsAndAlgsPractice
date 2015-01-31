@@ -11,14 +11,18 @@ class AssocList(Dictionary):
         pass
 
     def get(self, key):
-        v = self.list and self.list.find_where(lambda t: t[0] == key)
-        if v:
-            return v[1]
+        v = self.__item_at(key)
+
+        if v: return v[1]
 
         raise KeyError(key + ' not found')
 
     def __contains__(self, key):
+        return bool(self.__item_at(key))
+
+    def __item_at(self, key):
         return self.list and self.list.find_where(lambda t: t[0] == key)
+
 
 class Node(object):
     def __init__(self, datum, next = None):
