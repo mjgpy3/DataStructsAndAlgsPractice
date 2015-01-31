@@ -24,8 +24,6 @@ class Node(object):
     def find_where(self, p):
         if p(self.datum):
             return self.datum
-        elif self.next == None:
-            return None
 
-        return self.next.find_where(p)
+        return self.next and self.next.find_where(p)
 
