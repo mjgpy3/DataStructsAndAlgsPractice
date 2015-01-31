@@ -2,10 +2,10 @@ from dictionary import Dictionary
 
 class AssocList(Dictionary):
     def __init__(self):
-        self.elem = None
+        self.list = None
 
     def insert(self, key, value):
-        self.elem = key
+        self.list = Node((key, value), self.list)
 
     def delete(self, key):
         pass
@@ -14,4 +14,18 @@ class AssocList(Dictionary):
         pass
 
     def __contains__(self, key):
-        return key == self.elem
+        return self.list and self.list.find_where(lambda t: t[0] == key)
+
+class Node(object):
+    def __init__(self, datum, next = None):
+        self.datum = datum
+        self.next = next
+
+    def find_where(self, p):
+        if p(self.datum):
+            return self.datum
+        elif self.next == None:
+            return None
+
+        return self.next.find_where(p)
+

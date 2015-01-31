@@ -26,5 +26,15 @@ class AssocListTests(unittest.TestCase):
         self.uut.insert('answer', 42)
         self.assertTrue('answer' in self.uut)
 
+    def test_when_a_second_item_is_inserted_the_first_is_still_there(self):
+        self.uut.insert('answer', 42)
+        self.uut.insert('spaz', 99)
+        self.assertTrue('answer' in self.uut)
+
+    def test_when_a_second_item_is_inserted_the_second_is_there(self):
+        self.uut.insert('answer', 42)
+        self.uut.insert('spaz', 99)
+        self.assertTrue('spaz' in self.uut)
+
 if __name__ == '__main__':
     unittest.main()
