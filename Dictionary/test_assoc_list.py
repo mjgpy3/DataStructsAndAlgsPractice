@@ -66,5 +66,30 @@ class AssocListTests(unittest.TestCase):
     def test_delete_works_when_no_items_are_inserted(self):
         self.uut.delete('no existy')
 
+    def test_e2e_1(self):
+        (self
+            .uut
+            .insert('a', 99)
+            .insert('b', 100)
+            .insert('c', 72)
+            .insert('a', 100)
+        )
+        for k, v in [['a', 100], ['b', 100], ['c', 72]]:
+            self.assertEqual(v, self.uut.get(k))
+            self.assertTrue(k in self.uut)
+            self.assertFalse(v in self.uut)
+
+        (self
+            .uut
+            .delete('a')
+            .delete('b')
+            .delete('c')
+            .delete('d')
+            .delete('e')
+        )
+        for k in ['a', 'b', 'c', 'd']:
+            self.assertRaises(KeyError, self.uut.get, (k))
+            self.assertFalse(k in self.uut)
+
 if __name__ == '__main__':
     unittest.main()
