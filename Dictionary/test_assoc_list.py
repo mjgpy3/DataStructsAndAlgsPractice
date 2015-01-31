@@ -31,5 +31,21 @@ class AssocListTests(unittest.TestCase):
         self.uut.insert('answer', 42)
         self.assertEqual(42, self.uut.get('answer'))
 
+    def test_when_items_are_re_inserted_the_second_is_gotten(self):
+        self.uut.insert('answer', 35)
+        self.uut.insert('answer', 42)
+        self.assertEqual(42, self.uut.get('answer'))
+
+    def test_when_a_key_is_delete_is_cannot_be_gotten(self):
+        self.uut.insert('answer', 42)
+        self.uut.delete('answer')
+        self.assertRaises(KeyError, self.uut.get, ('answer'))
+
+    def test_when_a_key_that_was_inserted_twice_is_delete_is_cannot_be_gotten(self):
+        self.uut.insert('answer', 42)
+        self.uut.insert('answer', 35)
+        self.uut.delete('answer')
+        self.assertRaises(KeyError, self.uut.get, ('answer'))
+
 if __name__ == '__main__':
     unittest.main()
