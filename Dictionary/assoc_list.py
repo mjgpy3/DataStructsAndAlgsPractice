@@ -1,8 +1,11 @@
 from dictionary import Dictionary
 
 class AssocList(Dictionary):
+    def __init__(self):
+        self.elem = None
+
     def insert(self, key, value):
-        pass
+        self.elem = key
 
     def delete(self, key):
         pass
@@ -11,4 +14,4 @@ class AssocList(Dictionary):
         pass
 
     def __contains__(self, key):
-        pass
+        return key == self.elem
