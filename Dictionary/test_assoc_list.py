@@ -15,13 +15,17 @@ class AssocListTests(unittest.TestCase):
         self.assertTrue('answer' in self.uut)
 
     def test_when_a_second_item_is_inserted_the_first_is_still_there(self):
-        self.uut.insert('answer', 42)
-        self.uut.insert('spaz', 99)
+        (self
+            .uut
+            .insert('answer', 42)
+            .insert('spaz', 99))
         self.assertTrue('answer' in self.uut)
 
     def test_when_a_second_item_is_inserted_the_second_is_there(self):
-        self.uut.insert('answer', 42)
-        self.uut.insert('spaz', 99)
+        (self
+            .uut
+            .insert('answer', 42)
+            .insert('spaz', 99))
         self.assertTrue('spaz' in self.uut)
 
     def test_get_throws_a_key_error_when_sought_item_has_not_been_inserted(self):
@@ -32,20 +36,35 @@ class AssocListTests(unittest.TestCase):
         self.assertEqual(42, self.uut.get('answer'))
 
     def test_when_items_are_re_inserted_the_second_is_gotten(self):
-        self.uut.insert('answer', 35)
-        self.uut.insert('answer', 42)
+        (self
+            .uut
+            .insert('answer', 35)
+            .insert('answer', 42))
         self.assertEqual(42, self.uut.get('answer'))
 
     def test_when_a_key_is_delete_is_cannot_be_gotten(self):
-        self.uut.insert('answer', 42)
-        self.uut.delete('answer')
+        (self
+            .uut
+            .insert('answer', 42)
+            .delete('answer'))
         self.assertRaises(KeyError, self.uut.get, ('answer'))
 
     def test_when_a_key_that_was_inserted_twice_is_delete_is_cannot_be_gotten(self):
-        self.uut.insert('answer', 42)
-        self.uut.insert('answer', 35)
-        self.uut.delete('answer')
+        (self
+            .uut
+            .insert('answer', 42)
+            .insert('answer', 35)
+            .delete('answer'))
         self.assertRaises(KeyError, self.uut.get, ('answer'))
+
+    def test_insert_delete_then_insert_can_be_gotten(self):
+        (self.uut.insert('answer', 42)
+            .delete('answer')
+            .insert('answer', 35))
+        self.assertEqual(35, self.uut.get('answer'))
+
+    def test_delete_works_when_no_items_are_inserted(self):
+        self.uut.delete('no existy')
 
 if __name__ == '__main__':
     unittest.main()
