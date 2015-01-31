@@ -3,7 +3,6 @@
 import unittest
 from dict_test_cases import DictTestCases
 from assoc_list import AssocList
-from dictionary import Dictionary
 
 class AssocListTests(unittest.TestCase, DictTestCases):
     def setUp(self):
