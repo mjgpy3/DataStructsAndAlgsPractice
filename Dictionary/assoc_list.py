@@ -11,7 +11,11 @@ class AssocList(Dictionary):
         pass
 
     def get(self, key):
-        pass
+        v = self.list and self.list.find_where(lambda t: t[0] == key)
+        if v:
+            return v[1]
+
+        raise KeyError(key + ' not found')
 
     def __contains__(self, key):
         return self.list and self.list.find_where(lambda t: t[0] == key)

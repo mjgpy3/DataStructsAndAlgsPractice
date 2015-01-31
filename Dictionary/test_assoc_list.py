@@ -7,18 +7,6 @@ class AssocListTests(unittest.TestCase):
     def setUp(self):
         self.uut = AssocList()
 
-    def test_insert_can_be_used(self):
-        self.uut.insert('answer', 42)
-
-    def test_delete_can_be_used(self):
-        self.uut.delete('answer')
-
-    def test_get_can_be_used(self):
-        self.uut.get('answer')
-
-    def test_contains_can_be_used(self):
-        'answer' in self.uut
-
     def test_items_that_were_not_inserted_are_not_in_the_dict(self):
         self.assertFalse('answer' in self.uut)
 
@@ -35,6 +23,13 @@ class AssocListTests(unittest.TestCase):
         self.uut.insert('answer', 42)
         self.uut.insert('spaz', 99)
         self.assertTrue('spaz' in self.uut)
+
+    def test_get_throws_a_key_error_when_sought_item_has_not_been_inserted(self):
+        self.assertRaises(KeyError, self.uut.get, ('answer'))
+
+    def test_get_returns_the_sought_keys_value_when_it_has_been_inserted(self):
+        self.uut.insert('answer', 42)
+        self.assertEqual(42, self.uut.get('answer'))
 
 if __name__ == '__main__':
     unittest.main()
