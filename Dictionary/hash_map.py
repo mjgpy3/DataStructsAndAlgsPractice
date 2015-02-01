@@ -10,10 +10,9 @@ class HashMap(Dictionary):
     def insert(self, key, value):
         self.__size += 1
         self.__insert(key, value)
+        if len(self) == self.doubling_size():
+            self.__rehash()
         return self
-
-    def __insert(self, key, value):
-        self.__values[self.__locate_index(key)] = (key, value)
 
     def get(self, key):
         v = self.__get(key)
@@ -21,6 +20,18 @@ class HashMap(Dictionary):
         if v: return v[1]
 
         raise KeyError(str(key) + ' key not found')
+
+    def __contains__(self, key):
+        return bool(self.__get(key))
+
+    def capacity(self):
+        return self.__capacity
+
+    def doubling_size(self):
+        return self.__capacity * self.__load_factor
+
+    def __insert(self, key, value):
+        self.__values[self.__locate_index(key)] = (key, value)
 
     def __get(self, key):
         return self.__values[self.__locate_index(key)]
@@ -33,14 +44,15 @@ class HashMap(Dictionary):
 
         return i
 
-    def __contains__(self, key):
-        return bool(self.__get(key))
+    def __rehash(self):
+        self.__size = 0
+        self.__capacity *= 2
+        old_values = self.__values[:]
+        self.__values = [0]*self.__capacity
+
+        for i in old_values:
+            if i:
+                self.insert(i[0], i[1])
 
     def __len__(self):
         return self.__size
-
-    def capacity(self):
-        return self.__capacity
-
-    def doubling_size(self):
-        return self.__capacity * self.__load_factor

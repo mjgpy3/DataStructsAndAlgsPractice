@@ -4,7 +4,7 @@ import unittest
 from dict_test_cases import DictTestCases
 from hash_map import HashMap
 
-class HashMapTests(unittest.TestCase):
+class HashMapTests(unittest.TestCase, DictTestCases):
     def setUp(self):
         self.uut = HashMap()
 
@@ -34,38 +34,6 @@ class HashMapTests(unittest.TestCase):
     def test_insertion_increses_size_to_1(self):
         self.uut.insert(self.mock_hashes_to(), 42)
 
-    def test_items_that_were_not_inserted_are_not_in_the_dict(self):
-        self.assertFalse(self.mock_hashes_to() in self.uut)
-
-    def test_inserted_items_are_in_the_dict(self):
-        item = self.mock_hashes_to(1)
-        self.uut.insert(item, 42)
-        self.assertTrue(item in self.uut)
-
-    def test_when_a_second_item_is_inserted_the_first_is_still_there(self):
-        first = self.mock_hashes_to(1)
-        (self
-            .uut
-            .insert(first, 42)
-            .insert(self.mock_hashes_to(2), 99))
-        self.assertTrue(first in self.uut)
-
-    def test_when_a_second_item_is_inserted_the_second_is_there(self):
-        second = self.mock_hashes_to(1)
-        (self
-            .uut
-            .insert(self.mock_hashes_to(2), 42)
-            .insert(second, 99))
-        self.assertTrue(second in self.uut)
-
-    def test_get_throws_a_key_error_when_sought_item_has_not_been_inserted(self):
-        self.assertRaises(KeyError, self.uut.get, (self.mock_hashes_to(1)))
-
-    def test_get_returns_the_sought_keys_value_when_it_has_been_inserted(self):
-        obj = self.mock_hashes_to(1)
-        self.uut.insert(obj, 42)
-        self.assertEqual(42, self.uut.get(obj))
-
     def test_collisions_are_handled(self):
         first = self.mock_hashes_to(1)
         second = self.mock_hashes_to(1)
@@ -79,6 +47,16 @@ class HashMapTests(unittest.TestCase):
         self.uut.insert(item, 42)
 
         self.assertEqual(42, self.uut.get(item))
+
+    def test_when_at_doubling_size_then_the_capacity_doubles(self):
+        for i in xrange(11):
+            self.uut.insert(i, '_')
+
+        self.assertEqual(16, self.uut.capacity())
+
+        self.uut.insert(12, '_')
+
+        self.assertEqual(32, self.uut.capacity())
 
 if __name__ == '__main__':
     unittest.main()
