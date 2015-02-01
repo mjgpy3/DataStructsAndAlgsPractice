@@ -10,7 +10,7 @@ class HashMapTests(unittest.TestCase):
 
     def mock_hashes_to(self, index = 0):
         class Mock(object):
-            def hash(self):
+            def __hash__(self):
                 return index
 
             def __str__(self):

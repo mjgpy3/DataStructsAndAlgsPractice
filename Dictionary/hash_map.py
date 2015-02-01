@@ -26,7 +26,7 @@ class HashMap(Dictionary):
         return self.__values[self.__locate_index(key)]
 
     def __locate_index(self, key):
-        i = key.hash() % self.capacity()
+        i = hash(key) % self.capacity()
 
         while self.__values[i] and self.__values[i][0] != key:
             i = (i + 1) % self.capacity()
