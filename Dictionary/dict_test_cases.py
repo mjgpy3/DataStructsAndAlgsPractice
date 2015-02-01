@@ -58,6 +58,12 @@ class DictTestCases(object):
     def test_delete_works_when_no_items_are_inserted(self):
         self.uut.delete('no existy')
 
+    def test_insert_returns_the_list(self):
+        self.assertEqual(self.uut, self.uut.insert('', ''))
+
+    def test_delete_returns_the_list(self):
+        self.assertEqual(self.uut, self.uut.delete(''))
+
     def test_e2e_1(self):
         (self
             .uut
