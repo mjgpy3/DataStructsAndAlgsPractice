@@ -38,8 +38,9 @@ class HashMapTests(unittest.TestCase):
         self.assertFalse(self.mock_hashes_to() in self.uut)
 
     def test_inserted_items_are_in_the_dict(self):
-        self.uut.insert(self.mock_hashes_to(), 42)
-        self.assertTrue(self.mock_hashes_to() in self.uut)
+        item = self.mock_hashes_to(1)
+        self.uut.insert(item, 42)
+        self.assertTrue(item in self.uut)
 
     def test_when_a_second_item_is_inserted_the_first_is_still_there(self):
         first = self.mock_hashes_to(1)
@@ -72,6 +73,12 @@ class HashMapTests(unittest.TestCase):
         self.uut.insert(second, 'eggs')
         self.assertEqual('spam', self.uut.get(first))
         self.assertEqual('eggs', self.uut.get(second))
+
+    def test_inserting_items_with_a_higher_value_works(self):
+        item = self.mock_hashes_to(99)
+        self.uut.insert(item, 42)
+
+        self.assertEqual(42, self.uut.get(item))
 
 if __name__ == '__main__':
     unittest.main()

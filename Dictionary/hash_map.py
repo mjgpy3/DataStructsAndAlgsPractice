@@ -13,12 +13,7 @@ class HashMap(Dictionary):
         return self
 
     def __insert(self, key, value):
-        i = key.hash()
-
-        while self.__values[i] and self.__values[i][0] != key:
-            i = (i + 1) % self.capacity()
-
-        self.__values[i] = (key, value)
+        self.__values[self.__locate_index(key)] = (key, value)
 
     def get(self, key):
         v = self.__get(key)
@@ -28,15 +23,18 @@ class HashMap(Dictionary):
         raise KeyError(str(key) + ' key not found')
 
     def __get(self, key):
-        i = key.hash()
+        return self.__values[self.__locate_index(key)]
+
+    def __locate_index(self, key):
+        i = key.hash() % self.capacity()
 
         while self.__values[i] and self.__values[i][0] != key:
             i = (i + 1) % self.capacity()
 
-        return self.__values[i]
+        return i
 
     def __contains__(self, key):
-        return self.__values[key.hash()]
+        return bool(self.__get(key))
 
     def __len__(self):
         return self.__size
