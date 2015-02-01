@@ -30,6 +30,9 @@ class HashMap(Dictionary):
     def doubling_size(self):
         return self.__capacity * self.__load_factor
 
+    def delete(self, key):
+        return self
+
     def __insert(self, key, value):
         self.__values[self.__locate_index(key)] = (key, value)
 

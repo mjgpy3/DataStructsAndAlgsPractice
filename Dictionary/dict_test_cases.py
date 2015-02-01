@@ -34,7 +34,7 @@ class DictTestCases(object):
             .insert('answer', 42))
         self.assertEqual(42, self.uut.get('answer'))
 
-    def test_when_a_key_is_delete_is_cannot_be_gotten(self):
+    def test_when_a_key_is_delete_it_cannot_be_gotten(self):
         (self
             .uut
             .insert('answer', 42)
