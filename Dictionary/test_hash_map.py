@@ -9,9 +9,14 @@ class HashMapTests(unittest.TestCase):
         self.uut = HashMap()
 
     def mock_hashes_to(self, index = 0):
-        mock = lambda: None
-        mock.hash = lambda: 0
-        return mock
+        class Mock(object):
+            def hash(self):
+                return index
+
+            def __str__(self):
+                return "mock(%s)" % index
+            __repr__ = __str__
+        return Mock()
 
     def test_initial_current_capacity_is_16(self):
         self.assertEqual(16, self.uut.capacity())
@@ -59,6 +64,14 @@ class HashMapTests(unittest.TestCase):
         obj = self.mock_hashes_to(1)
         self.uut.insert(obj, 42)
         self.assertEqual(42, self.uut.get(obj))
+
+    def test_collisions_are_handled(self):
+        first = self.mock_hashes_to(1)
+        second = self.mock_hashes_to(1)
+        self.uut.insert(first, 'spam')
+        self.uut.insert(second, 'eggs')
+        self.assertEqual('spam', self.uut.get(first))
+        self.assertEqual('eggs', self.uut.get(second))
 
 if __name__ == '__main__':
     unittest.main()
