@@ -57,6 +57,7 @@ class HashMapTests(unittest.TestCase, DictTestCases):
         self.uut.insert(12, '_')
 
         self.assertEqual(32, self.uut.capacity())
+        self.assertEqual(12, len(self.uut))
 
 if __name__ == '__main__':
     unittest.main()
