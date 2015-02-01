@@ -68,5 +68,11 @@ class HashMapTests(unittest.TestCase, DictTestCases):
         self.uut.delete('foo')
         self.assertEqual(0, len(self.uut))
 
+    def test_len_is_0_after_delete_of_only_item_twice(self):
+        self.uut.insert('foo', '_')
+        self.uut.delete('foo')
+        self.uut.delete('foo')
+        self.assertEqual(0, len(self.uut))
+
 if __name__ == '__main__':
     unittest.main()

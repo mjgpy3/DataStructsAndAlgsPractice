@@ -29,7 +29,7 @@ class HashMap(Dictionary):
     def delete(self, key):
         i = self.__locate_index(key)
         v = self.__values[i]
-        if v:
+        if v and v[2]:
             self.__size -= 1
             self.__values[i] = (v[0], v[1], False)
         return self
