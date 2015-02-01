@@ -40,7 +40,6 @@ class DictTestCases(object):
             .insert('answer', 42)
             .delete('answer'))
         self.assertRaises(KeyError, self.uut.get, ('answer'))
-    '''
 
     def test_when_a_key_that_was_inserted_twice_is_delete_is_cannot_be_gotten(self):
         (self
@@ -89,4 +88,3 @@ class DictTestCases(object):
         for k in ['a', 'b', 'c', 'd']:
             self.assertRaises(KeyError, self.uut.get, (k))
             self.assertFalse(k in self.uut)
-    '''

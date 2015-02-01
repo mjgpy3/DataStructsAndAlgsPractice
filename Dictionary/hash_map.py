@@ -5,12 +5,14 @@ class HashMap(Dictionary):
         self.__load_factor = load_factor
         self.__capacity = 16
         self.__size = 0
+        self.__resize = 0
         self.__values = [0]*self.__capacity
 
     def insert(self, key, value):
         self.__size += 1
+        self.__resize += 1
         self.__insert(key, value)
-        if len(self) == self.doubling_size():
+        if self.__resize == self.doubling_size():
             self.__rehash()
         return self
 
@@ -28,6 +30,7 @@ class HashMap(Dictionary):
         i = self.__locate_index(key)
         v = self.__values[i]
         if v:
+            self.__size -= 1
             self.__values[i] = (v[0], v[1], False)
         return self
 
@@ -54,6 +57,7 @@ class HashMap(Dictionary):
 
     def __rehash(self):
         self.__size = 0
+        self.__resize = 0
         self.__capacity *= 2
         old_values = self.__values[:]
         self.__values = [0]*self.__capacity

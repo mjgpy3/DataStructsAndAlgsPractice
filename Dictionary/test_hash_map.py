@@ -59,5 +59,14 @@ class HashMapTests(unittest.TestCase, DictTestCases):
         self.assertEqual(32, self.uut.capacity())
         self.assertEqual(12, len(self.uut))
 
+    def test_len_is_0_after_delete_of_empty(self):
+        self.uut.delete('foo')
+        self.assertEqual(0, len(self.uut))
+
+    def test_len_is_0_after_delete_of_only_item(self):
+        self.uut.insert('foo', '_')
+        self.uut.delete('foo')
+        self.assertEqual(0, len(self.uut))
+
 if __name__ == '__main__':
     unittest.main()
