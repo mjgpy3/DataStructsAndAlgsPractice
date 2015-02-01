@@ -24,20 +24,25 @@ class HashMap(Dictionary):
     def __contains__(self, key):
         return bool(self.__get(key))
 
+    def delete(self, key):
+        i = self.__locate_index(key)
+        v = self.__values[i]
+        if v:
+            self.__values[i] = (v[0], v[1], False)
+        return self
+
     def capacity(self):
         return self.__capacity
 
     def doubling_size(self):
         return self.__capacity * self.__load_factor
 
-    def delete(self, key):
-        return self
-
     def __insert(self, key, value):
-        self.__values[self.__locate_index(key)] = (key, value)
+        self.__values[self.__locate_index(key)] = (key, value, True)
 
     def __get(self, key):
-        return self.__values[self.__locate_index(key)]
+        value = self.__values[self.__locate_index(key)]
+        return value if value and value[2] else None
 
     def __locate_index(self, key):
         i = hash(key) % self.capacity()
@@ -54,7 +59,7 @@ class HashMap(Dictionary):
         self.__values = [0]*self.__capacity
 
         for i in old_values:
-            if i:
+            if i and i[2]:
                 self.insert(i[0], i[1])
 
     def __len__(self):
