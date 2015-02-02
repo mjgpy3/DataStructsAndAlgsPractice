@@ -29,7 +29,7 @@ class HashMap(Dictionary):
     def delete(self, key):
         i = self.__locate_index(key)
         v = self.__values[i]
-        if v and v[2]:
+        if self.__de_tombstone(v):
             self.__size -= 1
             self.__values[i] = (v[0], v[1], False)
         return self
@@ -40,12 +40,15 @@ class HashMap(Dictionary):
     def doubling_size(self):
         return self.__capacity * self.__load_factor
 
+    def __len__(self):
+        return self.__size
+
     def __insert(self, key, value):
         self.__values[self.__locate_index(key)] = (key, value, True)
 
     def __get(self, key):
         value = self.__values[self.__locate_index(key)]
-        return value if value and value[2] else None
+        return self.__de_tombstone(value)
 
     def __locate_index(self, key):
         i = hash(key) % self.capacity()
@@ -63,8 +66,8 @@ class HashMap(Dictionary):
         self.__values = [0]*self.__capacity
 
         for i in old_values:
-            if i and i[2]:
+            if self.__de_tombstone(i):
                 self.insert(i[0], i[1])
 
-    def __len__(self):
-        return self.__size
+    def __de_tombstone(self, value):
+      return value if value and value[2] else None
